@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>爱情</title>
+    <link rel="icon" type="image/GIF" href="res/favicon.ico"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="full-screen" content="yes"/>
+    <meta name="screen-orientation" content="portrait"/>
+    <meta name="x5-fullscreen" content="true"/>
+    <meta name="360-fullscreen" content="true"/>
+    <style>
+        body, canvas, div {
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+            -khtml-user-select: none;
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        }
+    </style>
+    <script type="text/javascript" src="WeixinApi.js?v=4.3"></script>
+</head>
+<body style="padding:0; margin: 0; background: #000;">
+<div style="display:none;">
+    <img src="http://brain.b0.upaiyun.com/yjy/res/icon.png">
+</div>
+<img width="500" height="500" style="position:absolute;top:-10000px;" src="http://brain.b0.upaiyun.com/yjy/res/icon.png">
+<canvas id="gameCanvas" width="640" height="1024"></canvas>
+<script>
+
+    //0表示普通版，1表示大众点评版
+    var gamemode = 0;//0 normal，1：hongbao
+
+    //大众点评的链接
+    var urlstr = 'http://m.dianping.com/mmarket/redirect?url=http%3a%2f%2fm.dianping.com%2freservation%2fshare%2fticketactivity%2f10034%3Ftoken%3d%21';
+
+    //分享结束语，默认是这个值，当游戏结束时，会调用gameDidEnd函数，shareDes会变成新的
+    var shareDes = "3以内加减法，确定你都会？";
+
+    //游戏的icon图标
+    var gameIcon = "http://brain.b0.upaiyun.com/yjy/res/icon.png";
+
+
+
+    //以下是实用的非官方API，请替换成官方的API，官方的API说明地址：
+    // http://mp.weixin.qq.com/wiki/7/aaa137b55fb2e0456bf8dd9148dd613f.html#.E6.AD.A5.E9.AA.A4.E4.B8.80.EF.BC.9A.E7.BB.91.E5.AE.9A.E5.9F.9F.E5.90.8D
+
+
+
+    //使用警告：此Api非官方版本，请各位尽量将分享功能迁移至腾讯官方版，会更稳定些！
+    // 微信分享的数据
+    var wxData = {
+        "appId": "wx729bcc4f3ca39e87", // 服务号可以填写appId
+        "imgUrl" : 'http://brain.b0.upaiyun.com/yjy/res/icon.png',
+        "link" : 'http://brain.b0.upaiyun.com/yjy/index.html',
+        "desc" : shareDes,
+        "title" : "1+2=3"
+    };
+
+    //当一局游戏结速的时候会调用此函数,shareDes会被更新
+    function gameDidEnd(){
+        alert(shareDes);
+        wxData = {
+            "appId": "wx729bcc4f3ca39e87", // 服务号可以填写appId
+            "imgUrl" : 'http://brain.b0.upaiyun.com/yjy/res/icon.png',
+            "link" : 'http://brain.b0.upaiyun.com/yjy/index.html',
+            "desc" : shareDes,
+            "title" : "1+2=3"
+        };
+    }
+
+    // 需要分享的内容，请放到ready里
+    WeixinApi.ready(function(Api) {
+        // 分享的回调
+        var wxCallbacks = {
+            // 收藏操作是否触发回调，默认是开启的
+            favorite : false,
+
+            // 分享操作开始之前
+            ready : function() {
+                // 你可以在这里对分享的数据进行重组
+                //alert("准备分享");
+            },
+            // 分享被用户自动取消
+            cancel : function(resp) {
+                // 你可以在你的页面上给用户一个小Tip，为什么要取消呢？
+                //alert("分享被取消，msg=" + resp.err_msg);
+            },
+            // 分享失败了
+            fail : function(resp) {
+                // 分享失败了，是不是可以告诉用户：不要紧，可能是网络问题，一会儿再试试？
+                //alert("分享失败，msg=" + resp.err_msg);
+            },
+            // 分享成功
+            confirm : function(resp) {
+                // 分享成功了，我们是不是可以做一些分享统计呢？
+                //alert("分享成功，msg=" + resp.err_msg);
+            },
+            // 整个分享过程结束
+            all : function(resp,shareTo) {
+                // 如果你做的是一个鼓励用户进行分享的产品，在这里是不是可以给用户一些反馈了？
+                //alert("分享" + (shareTo ? "到" + shareTo : "") + "结束，msg=" + resp.err_msg);
+            }
+        };
+
+        // 用户点开右上角popup菜单后，点击分享给好友，会执行下面这个代码
+        Api.shareToFriend(wxData, wxCallbacks);
+
+        // 点击分享到朋友圈，会执行下面这个代码
+        Api.shareToTimeline(wxData, wxCallbacks);
+
+        // 点击分享到腾讯微博，会执行下面这个代码
+        Api.shareToWeibo(wxData, wxCallbacks);
+
+        // iOS上，可以直接调用这个API进行分享，一句话搞定
+        Api.generalShare(wxData,wxCallbacks);
+    });
+
+</script>
+<script src="frameworks/cocos2d-html5/CCBoot.js"></script>
+<script src="main.js"></script>
+</body>
+</html>
