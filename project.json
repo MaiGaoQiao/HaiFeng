@@ -17,6 +17,7 @@
         "src/MyLoaderScene.js",
         "src/GameScene.js",
         "src/AnswerSprite.js",
+        "src/Page00.js",
         "src/Page0.js",
         "src/Page1.js",
         "src/Page2.js",

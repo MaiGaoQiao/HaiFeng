@@ -7,6 +7,7 @@ var Page0Layer = cc.Layer.extend({
     man:null,
     woman:null,
     animationDone:false,
+    playingAnimation:false,
     photo:null,
     photo1:null,
     ctor:function () {
@@ -22,7 +23,7 @@ var Page0Layer = cc.Layer.extend({
         this.bgLayer =new cc.Layer();
         page.addChild(this.bgLayer);
         this.bgLayer.setPosition(0,0);
-        var background = new cc.Sprite(res.p2_bak_jpg);
+        var background = new cc.Sprite(bgTexture2d);
         var bgSize = background.getContentSize();
         background.attr({
             x: 0,
@@ -91,11 +92,12 @@ var Page0Layer = cc.Layer.extend({
         return true;
     },
     onEnter:function () {
-        cc.log("SceneTestLayer1#onEnter");
         this._super();
     },
 
     playAnimation:function () {
+        if(this.playingAnimation) return;
+        this.playingAnimation = true;
         var action1 = cc.moveTo(2.5, cc.p(-55, 0));
         var action3 = cc.delayTime(0.3+2.0);
         var action4 = cc.moveTo(2.5, cc.p(-550, 0));
@@ -131,21 +133,22 @@ var Page0Layer = cc.Layer.extend({
 
     },
     stopAnimation:function(){
-        director.getActionManager().pauseTarget(this.bgLayer);
-        director.getActionManager().pauseTarget(this.man);
-        director.getActionManager().pauseTarget(this.woman);
-        director.getActionManager().pauseTarget(this.photo);
-        director.getActionManager().pauseTarget(this.photo1);
+        cc.director.getActionManager().pauseTarget(this.bgLayer);
+        cc.director.getActionManager().pauseTarget(this.man);
+        cc.director.getActionManager().pauseTarget(this.woman);
+        cc.director.getActionManager().pauseTarget(this.photo);
+        cc.director.getActionManager().pauseTarget(this.photo1);
     },
     resumeAnimation:function(){
-        director.getActionManager().resumeTarget(this.bgLayer);
-        director.getActionManager().resumeTarget(this.man);
-        director.getActionManager().resumeTarget(this.woman);
-        director.getActionManager().resumeTarget(this.photo);
-        director.getActionManager().resumeTarget(this.photo1);
+        cc.director.getActionManager().resumeTarget(this.bgLayer);
+        cc.director.getActionManager().resumeTarget(this.man);
+        cc.director.getActionManager().resumeTarget(this.woman);
+        cc.director.getActionManager().resumeTarget(this.photo);
+        cc.director.getActionManager().resumeTarget(this.photo1);
     },
 
     playAnimationDone:function(){
         this.animationDone = true;
+        this.playingAnimation = false;
     }
 });

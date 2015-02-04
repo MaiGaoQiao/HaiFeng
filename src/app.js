@@ -24,42 +24,50 @@ var HelloWorldLayer = cc.Layer.extend({
         this.addChild(bg);
         bg.setPosition(0,0);
 
+        var pScheduler = cc.director.getScheduler();
+        pScheduler.setTimeScale(2.0); //实现加速效果
+
         this.pageContainer = new Page0Layer();
         this.addChild(this.pageContainer);
 
-        var page = new Page0Layer();
+        var page = new Page00Layer();
         this.pageContainer.addChild(page);
         this.pagesArray.push(page);
 
-        page = new Page1Layer();
+        page = new Page0Layer();
         this.pageContainer.addChild(page);
         this.pagesArray.push(page);
         page.setPosition(0,-this.pageHeight);
 
-        page = new Page2Layer();
+        page = new Page1Layer();
         this.pageContainer.addChild(page);
         this.pagesArray.push(page);
         page.setPosition(0,-this.pageHeight*2);
 
-        page = new Page3Layer();
+        page = new Page2Layer();
         this.pageContainer.addChild(page);
         this.pagesArray.push(page);
         page.setPosition(0,-this.pageHeight*3);
 
-        page = new Page4Layer();
+        page = new Page3Layer();
         this.pageContainer.addChild(page);
         this.pagesArray.push(page);
         page.setPosition(0,-this.pageHeight*4);
 
-        page = new Page5Layer();
+        page = new Page4Layer();
         this.pageContainer.addChild(page);
         this.pagesArray.push(page);
         page.setPosition(0,-this.pageHeight*5);
 
-        page = new Page6Layer();
+        page = new Page5Layer();
         this.pageContainer.addChild(page);
         this.pagesArray.push(page);
         page.setPosition(0,-this.pageHeight*6);
+
+        page = new Page6Layer();
+        this.pageContainer.addChild(page);
+        this.pagesArray.push(page);
+        page.setPosition(0,-this.pageHeight*7);
 
 
         cc.eventManager.addListener({
@@ -75,12 +83,10 @@ var HelloWorldLayer = cc.Layer.extend({
         return true;
     },
     onEnter:function () {
-        cc.log("SceneTestLayer1#onEnter");
         this._super();
     },
 
     onEnterTransitionDidFinish:function () {
-        cc.log("SceneTestLayer1#onEnterTransitionDidFinish");
         this._super();
 
         this.currentPage = this.pagesArray[this.currentPageIndex];
