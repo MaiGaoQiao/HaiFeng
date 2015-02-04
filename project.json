@@ -19,6 +19,11 @@
         "src/AnswerSprite.js",
         "src/Page0.js",
         "src/Page1.js",
+        "src/Page2.js",
+        "src/Page3.js",
+        "src/Page4.js",
+        "src/Page5.js",
+        "src/Page6.js",
         "src/app.js"
     ]
 }

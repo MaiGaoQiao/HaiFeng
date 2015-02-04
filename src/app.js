@@ -36,6 +36,32 @@ var HelloWorldLayer = cc.Layer.extend({
         this.pagesArray.push(page);
         page.setPosition(0,-this.pageHeight);
 
+        page = new Page2Layer();
+        this.pageContainer.addChild(page);
+        this.pagesArray.push(page);
+        page.setPosition(0,-this.pageHeight*2);
+
+        page = new Page3Layer();
+        this.pageContainer.addChild(page);
+        this.pagesArray.push(page);
+        page.setPosition(0,-this.pageHeight*3);
+
+        page = new Page4Layer();
+        this.pageContainer.addChild(page);
+        this.pagesArray.push(page);
+        page.setPosition(0,-this.pageHeight*4);
+
+        page = new Page5Layer();
+        this.pageContainer.addChild(page);
+        this.pagesArray.push(page);
+        page.setPosition(0,-this.pageHeight*5);
+
+        page = new Page6Layer();
+        this.pageContainer.addChild(page);
+        this.pagesArray.push(page);
+        page.setPosition(0,-this.pageHeight*6);
+
+
         cc.eventManager.addListener({
             event: cc.EventListener.TOUCH_ONE_BY_ONE,
             swallowTouches: true,
