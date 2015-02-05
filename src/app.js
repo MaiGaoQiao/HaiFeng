@@ -96,10 +96,10 @@ var HelloWorldLayer = cc.Layer.extend({
         var target = event.getCurrentTarget();
         var position = touch.getLocation();
         target.beginY = position.y;
-            cc.log("animationDone=true");
             var pl = touch.getPreviousLocation();
             //var dx = position.x - pl.x;
             var dy = position.y - pl.y;
+
             target.pageContainer.setPosition(target.pageContainer.x,target.pageContainer.y+dy);
 
         return true;
@@ -112,7 +112,10 @@ var HelloWorldLayer = cc.Layer.extend({
         var pl = touch.getPreviousLocation();
         //var dx = position.x - pl.x;
         var dy = position.y - pl.y;
-        target.pageContainer.setPosition(target.pageContainer.x,target.pageContainer.y+dy);
+        if((target.currentPageIndex==0 && dy < 0)|| (target.currentPageIndex==target.pagesArray.length-1 && dy > 0)){
+            target.pageContainer.setPosition(target.pageContainer.x,target.pageContainer.y);
+        }else
+            target.pageContainer.setPosition(target.pageContainer.x,target.pageContainer.y+dy);
     },
     onTouchEnded:function (touch, event) {
         var target = event.getCurrentTarget();

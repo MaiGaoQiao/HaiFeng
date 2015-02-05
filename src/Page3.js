@@ -103,29 +103,29 @@ var Page3Layer = cc.Layer.extend({
         //var action6 = cc.spawn(cc.moveTo(2.0,cc.p(-250,0)),cc.scaleTo(2.0,0.8,0.8));
         this.bgLayer.runAction( cc.sequence(action1));
 
-        var action2 = cc.delayTime(0.5);
+        var action2 = cc.delayTime(0.1);
         this.datePhoto.setOpacity(0);
         this.datePhoto.setVisible(true);
         this.datePhoto.runAction(cc.sequence(action2,cc.fadeIn(1.0)));
 
-        var action3 = cc.delayTime(0.3+2.0+0.5);
+        var action3 = cc.delayTime(0.3+1.0+0.5);
         this.marriagePhoto.setOpacity(0);
         this.marriagePhoto.setVisible(true);
         this.marriagePhoto.runAction(cc.sequence(action3,cc.fadeIn(1.0)));
 
-        var action4 = cc.delayTime(0.3+2.0+0.5+1.5);
+        var action4 = cc.delayTime(0.3+1.0+0.5+1.5);
         this.girlPhoto.setOpacity(0);
         this.girlPhoto.setVisible(true);
         this.girlPhoto.runAction(cc.sequence(action4,cc.fadeIn(1.0)));
 
-        var action5 = cc.delayTime(0.3+2.5+0.3+1.0+0.5+2.0);
+        var action5 = cc.delayTime(0.3+1.5+0.3+1.0+0.5+2.0);
         var photoSize = this.photo.getContentSize();
         this.photo.setOpacity(0);
         this.photo.setVisible(true);
         var action6 = cc.spawn(cc.moveTo(1.5,cc.p(size.width-photoSize.width/2,0)),cc.fadeIn(1.5));
         this.photo.runAction(cc.sequence(action5,action6));
 
-        var action5 = cc.delayTime(0.3+2.5+0.3+2.5+1.0+0.5+2.0);
+        var action5 = cc.delayTime(0.3+1.5+0.3+2.5+1.0+0.5+2.0);
         var photoSize = this.photo1.getContentSize();
         this.photo1.setOpacity(0);
         this.photo1.setVisible(true);
