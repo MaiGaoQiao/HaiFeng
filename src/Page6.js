@@ -34,6 +34,12 @@ var Page6Layer = cc.Layer.extend({
         this.bgLayer.addChild(background, 0);
         background.setAnchorPoint(cc.p(0,0));
 
+        var label = cc.LabelTTF.create("样片", "Microsoft STSong", 200);
+        label.setColor(cc.color(255,255,255,80));
+        label.setOpacity(150);
+        label.setPosition(cc.p(size.width/2,size.height/2));
+        this.addChild(label);
+
         this.bgLayer = new cc.Layer();
         this.addChild(this.bgLayer);
         this.bgLayer.setPosition(0,0);
@@ -78,6 +84,37 @@ var Page6Layer = cc.Layer.extend({
         });
         this.addChild(this.photo1, 100);
         this.photo1.setVisible(false);
+
+        var sprite = new cc.Sprite(res.shareButton_png);
+        var sprite1 = new cc.Sprite(res.shareButton_png);
+        sprite1.setScale(1.1);
+        var spriteSize = sprite.getContentSize();
+        sprite1.setPosition(cc.p(-spriteSize.width*0.1/2,-spriteSize.height*0.1/2));
+
+        var shareItem = new cc.MenuItemSprite(sprite,sprite1,function () {
+            //cc.audioEngine.playEffect(res.button_press_wav, false);
+            this.shareGame();
+        }, this);
+        shareItem.x = 60;
+        shareItem.y = 100;
+
+        var sprite = new cc.Sprite(res.shareButton_png);
+        var sprite1 = new cc.Sprite(res.shareButton_png);
+        sprite1.setScale(1.1);
+        var spriteSize = sprite.getContentSize();
+        sprite1.setPosition(cc.p(-spriteSize.width*0.1/2,-spriteSize.height*0.1/2));
+
+        var restartItem = new cc.MenuItemSprite(sprite,sprite1,function () {
+            //cc.audioEngine.playEffect(res.button_press_wav, false);
+            this.jumpPage();
+        }, this);
+        restartItem.x = 140;
+        restartItem.y = 100;
+
+        var menu = new cc.Menu(restartItem,shareItem);
+        menu.x = 0;
+        menu.y = 0;
+        this.addChild(menu);
 
         this.shareUI = new ShareUI();
         this.addChild(this.shareUI, 200);
@@ -174,6 +211,10 @@ var Page6Layer = cc.Layer.extend({
         //    wxData["desc"]= descrition = "好难啊，找厕所也需要最强大脑吗？";
         //}
         this.shareUI.visible =true;
+    },
+
+    jumpPage:function(){
+        window.location.href="http://m.mcake.com/hd/2015/valentine.html?key1=ad&key2=kolwapbluefocus";
     }
 });
 
