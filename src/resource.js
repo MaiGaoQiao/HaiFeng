@@ -37,7 +37,8 @@ var res = {
     p7_text : "res/p7-text.png",
     p08_flower : "res/p08-flower.png",
     p08_text : "res/p08-text.png",
-    p08_flowers : "res/p08-flowers.png"
+    p08_flowers : "res/p08-flowers.png",
+    shareButton_png : "res/shareButton.png"
 };
 
 var g_resources = [];
