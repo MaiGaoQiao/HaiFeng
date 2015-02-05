@@ -95,11 +95,11 @@ var Page6Layer = cc.Layer.extend({
             //cc.audioEngine.playEffect(res.button_press_wav, false);
             this.shareGame();
         }, this);
-        shareItem.x = 60;
+        shareItem.x = size.width-120;
         shareItem.y = 100;
 
-        var sprite = new cc.Sprite(res.shareButton_png);
-        var sprite1 = new cc.Sprite(res.shareButton_png);
+        var sprite = new cc.Sprite(res.buyButton_png);
+        var sprite1 = new cc.Sprite(res.buyButton_png);
         sprite1.setScale(1.1);
         var spriteSize = sprite.getContentSize();
         sprite1.setPosition(cc.p(-spriteSize.width*0.1/2,-spriteSize.height*0.1/2));
@@ -108,7 +108,7 @@ var Page6Layer = cc.Layer.extend({
             //cc.audioEngine.playEffect(res.button_press_wav, false);
             this.jumpPage();
         }, this);
-        restartItem.x = 140;
+        restartItem.x = 120;
         restartItem.y = 100;
 
         var menu = new cc.Menu(restartItem,shareItem);
