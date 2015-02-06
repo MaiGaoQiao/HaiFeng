@@ -25,7 +25,7 @@ var HelloWorldLayer = cc.Layer.extend({
         bg.setPosition(0,0);
 
         var pScheduler = cc.director.getScheduler();
-        pScheduler.setTimeScale(2.0); //实现加速效果
+        pScheduler.setTimeScale(1.5); //实现加速效果
 
         this.pageContainer = new Page0Layer();
         this.addChild(this.pageContainer);
@@ -35,7 +35,7 @@ var HelloWorldLayer = cc.Layer.extend({
         this.pagesArray.push(page);
 
         page = new Page0Layer();
-        this.pageContainer.addChild(page);
+        this.pageContainer.addChild(page,-100);
         this.pagesArray.push(page);
         page.setPosition(0,-this.pageHeight);
 

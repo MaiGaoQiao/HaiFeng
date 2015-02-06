@@ -8,6 +8,7 @@ var Page4Layer = cc.Layer.extend({
     playingAnimation:false,
     photo:null,
     photo1:null,
+    ffSprite:null,
     womanPeople:null,
     ctor:function () {
         //////////////////////////////
@@ -41,6 +42,16 @@ var Page4Layer = cc.Layer.extend({
         this.bgLayer = new cc.Layer();
         this.addChild(this.bgLayer);
         this.bgLayer.setPosition(0,0);
+
+        this.ffSprite = new cc.Sprite(res.p6_ff);
+        this.ffSprite.attr({
+            x: 320,
+            y: 0
+        });
+        this.bgLayer.addChild(this.ffSprite, 0);
+        this.ffSprite.setAnchorPoint(cc.p(0.5,0));
+        this.ffSprite.setVisible(false);
+
         this.womanPeople = new cc.Sprite(res.p6_people);
         this.womanPeople.attr({
             x: 320,
@@ -67,6 +78,10 @@ var Page4Layer = cc.Layer.extend({
         });
         this.addChild(this.photo1, 100);
         this.photo1.setVisible(false);
+        var asprite = new cc.Sprite(res.arrow_png);
+        this.photo1.addChild(asprite,0);
+        asprite.setPosition(size.width/2,45);
+        asprite.runAction(cc.repeatForever(cc.sequence(cc.moveBy(1.5,cc.p(0,20)),cc.moveBy(1.5,cc.p(0,-20)))));
         return true;
     },
 
@@ -77,19 +92,25 @@ var Page4Layer = cc.Layer.extend({
     playAnimation:function () {
         if(this.playingAnimation) return;
         this.playingAnimation = true;
-        var action2 = cc.delayTime(0.5);
+
+        var action1 = cc.delayTime(0.5);
+        this.ffSprite.setOpacity(0);
+        this.ffSprite.setVisible(true);
+        this.ffSprite.runAction(cc.sequence(action1,cc.fadeIn(1.0)));
+
+        var action2 = cc.delayTime(1.5);
         this.womanPeople.setOpacity(0);
         this.womanPeople.setVisible(true);
         this.womanPeople.runAction(cc.sequence(action2,cc.fadeIn(1.0)));
 
-        var action5 = cc.delayTime(0.3+2.5+0.3);
+        var action5 = cc.delayTime(0.6+2.5+0.6);
         var photoSize = this.photo.getContentSize();
         this.photo.setOpacity(0);
         this.photo.setVisible(true);
         var action6 = cc.spawn(cc.moveTo(1.5,cc.p(size.width-photoSize.width/2,50)),cc.fadeIn(2.5));
         this.photo.runAction(cc.sequence(action5,action6));
 
-        var action5 = cc.delayTime(0.3+2.5+0.3+2.5+1.0);
+        var action5 = cc.delayTime(0.6+2.5+0.6+2.5+1.0);
         var photoSize = this.photo1.getContentSize();
         this.photo1.setOpacity(0);
         this.photo1.setVisible(true);

@@ -92,6 +92,10 @@ var Page3Layer = cc.Layer.extend({
         });
         this.addChild(this.photo1, 100);
         this.photo1.setVisible(false);
+        var asprite = new cc.Sprite(res.arrow_png);
+        this.photo1.addChild(asprite,0);
+        asprite.setPosition(size.width/2,45);
+        asprite.runAction(cc.repeatForever(cc.sequence(cc.moveBy(1.5,cc.p(0,20)),cc.moveBy(1.5,cc.p(0,-20)))));
         return true;
     },
 
@@ -110,9 +114,9 @@ var Page3Layer = cc.Layer.extend({
         this.bgLayer.runAction( cc.sequence(action1));
 
         var action2 = cc.delayTime(0.1);
-        this.datePhoto.setOpacity(0);
-        this.datePhoto.setVisible(true);
-        this.datePhoto.runAction(cc.sequence(action2,cc.fadeIn(1.0)));
+        this.girlPhoto.setOpacity(0);
+        this.girlPhoto.setVisible(true);
+        this.girlPhoto.runAction(cc.sequence(action2,cc.fadeIn(1.0)));
 
         var action3 = cc.delayTime(0.3+1.0+0.5);
         this.marriagePhoto.setOpacity(0);
@@ -120,9 +124,9 @@ var Page3Layer = cc.Layer.extend({
         this.marriagePhoto.runAction(cc.sequence(action3,cc.fadeIn(1.0)));
 
         var action4 = cc.delayTime(0.3+1.0+0.5+1.5);
-        this.girlPhoto.setOpacity(0);
-        this.girlPhoto.setVisible(true);
-        this.girlPhoto.runAction(cc.sequence(action4,cc.fadeIn(1.0)));
+        this.datePhoto.setOpacity(0);
+        this.datePhoto.setVisible(true);
+        this.datePhoto.runAction(cc.sequence(action4,cc.fadeIn(1.0)));
 
         var action5 = cc.delayTime(0.3+1.5+0.3+1.0+0.5+2.0);
         var photoSize = this.photo.getContentSize();

@@ -82,6 +82,11 @@ var Page00Layer = cc.Layer.extend({
         });
         this.addChild(this.photo1, 101);
         this.photo1.setVisible(false);
+
+        var asprite = new cc.Sprite(res.arrow_png);
+        this.photo1.addChild(asprite,0);
+        asprite.setPosition(size.width/2,45);
+        asprite.runAction(cc.repeatForever(cc.sequence(cc.moveBy(1.5,cc.p(0,20)),cc.moveBy(1.5,cc.p(0,-20)))));
         return true;
     },
     onEnter:function () {
