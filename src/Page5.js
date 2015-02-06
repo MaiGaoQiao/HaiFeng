@@ -6,9 +6,11 @@ var Page5Layer = cc.Layer.extend({
     bgLayer:null,
     animationDone:false,
     playingAnimation:false,
+    photoLayer:null,
     photo:null,
     photo1:null,
     people:null,
+    people2:null,
     ctor:function () {
         //////////////////////////////
         // 1. super init first
@@ -41,14 +43,29 @@ var Page5Layer = cc.Layer.extend({
         this.bgLayer = new cc.Layer();
         this.addChild(this.bgLayer);
         this.bgLayer.setPosition(0,0);
-        this.people = new cc.Sprite(res.p7_people);
+
+        this.photoLayer = new cc.Layer();
+        this.bgLayer.addChild(this.photoLayer);
+        this.photoLayer.setPosition(0,0);
+
+
+        this.people = new cc.Sprite(res.p7_people1);
         this.people.attr({
             x: 320,
             y: 0
         });
-        this.bgLayer.addChild(this.people, 0);
+        this.photoLayer.addChild(this.people, 2);
         this.people.setAnchorPoint(cc.p(0.5,0));
         this.people.setVisible(false);
+
+        this.people2 = new cc.Sprite(res.p7_people2);
+        this.people2.attr({
+            x: 320,
+            y: 0
+        });
+        this.photoLayer.addChild(this.people2, 0);
+        this.people2.setAnchorPoint(cc.p(0.5,0));
+        this.people2.setVisible(false);
 
         this.photo = new cc.Sprite(res.p7_text);
         this.photo.setAnchorPoint(cc.p(0.5,0));
@@ -80,7 +97,16 @@ var Page5Layer = cc.Layer.extend({
         var action2 = cc.delayTime(0.5);
         this.people.setOpacity(0);
         this.people.setVisible(true);
-        this.people.runAction(cc.sequence(action2,cc.fadeIn(1.0)));
+        this.people.runAction(cc.sequence(action2,cc.fadeIn(1.0),cc.tintTo(1.5,177,177,0)));
+
+        var action3 = cc.delayTime(1.5);
+        this.people2.setOpacity(0);
+        this.people2.setVisible(true);
+        this.people2.runAction(cc.sequence(action3,cc.fadeIn(1.0),cc.tintTo(1.5,177,177,177)));
+
+
+        //var action4 = cc.delayTime(2.5);
+        //this.photoLayer.runAction(cc.sequence(action4,cc.tintTo(1.0,177,177,0)));
 
         var action5 = cc.delayTime(0.3+2.5+0.3);
         var photoSize = this.photo.getContentSize();
