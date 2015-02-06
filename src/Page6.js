@@ -58,6 +58,7 @@ var Page6Layer = cc.Layer.extend({
         this.addChild(this.bgLayer);
         this.bgLayer.setPosition(0,0);
         this.textPhoto = new cc.Sprite(res.p08_text);
+        var photoSize = this.textPhoto.getContentSize();
         this.textPhoto.attr({
             x: 345,
             y: 70
@@ -78,14 +79,14 @@ var Page6Layer = cc.Layer.extend({
         this.flowersPhoto.setAnchorPoint(cc.p(0.5,0));
         this.flowersPhoto.setVisible(false);
 
-        this.photo1 = new cc.Sprite(res.p2_netx_png);
-        this.photo1.setAnchorPoint(cc.p(0.5,0));
-        this.photo1.attr({
-            x: size.width/2,
-            y: -200
-        });
-        this.addChild(this.photo1, 100);
-        this.photo1.setVisible(false);
+        //this.photo1 = new cc.Sprite(res.p2_netx_png);
+        //this.photo1.setAnchorPoint(cc.p(0.5,0));
+        //this.photo1.attr({
+        //    x: size.width/2,
+        //    y: -200
+        //});
+        //this.addChild(this.photo1, 100);
+        //this.photo1.setVisible(false);
 
         var sprite = new cc.Sprite(res.shareButton_png);
         var sprite1 = new cc.Sprite(res.shareButton_png);
@@ -97,8 +98,8 @@ var Page6Layer = cc.Layer.extend({
             //cc.audioEngine.playEffect(res.button_press_wav, false);
             this.shareGame();
         }, this);
-        this.shareItem.x = size.width-120;
-        this.shareItem.y = 100;
+        this.shareItem.x = size.width/2+120;
+        this.shareItem.y = size.height/2;
         this.shareItem.setOpacity(0);
 
         var sprite = new cc.Sprite(res.buyButton_png);
@@ -111,8 +112,8 @@ var Page6Layer = cc.Layer.extend({
             //cc.audioEngine.playEffect(res.button_press_wav, false);
             this.jumpPage();
         }, this);
-        this.restartItem.x = 120;
-        this.restartItem.y = 100;
+        this.restartItem.x = size.width/2-120;
+        this.restartItem.y = size.height/2;
         this.restartItem.setOpacity(0);
 
         var menu = new cc.Menu(this.restartItem,this.shareItem);
@@ -131,10 +132,10 @@ var Page6Layer = cc.Layer.extend({
         //    onTouchMoved: this.onTouchMoved,
         //    onTouchEnded: this.onTouchEnded
         //}, this);
-        var asprite = new cc.Sprite(res.arrow_png);
-        this.photo1.addChild(asprite,0);
-        asprite.setPosition(size.width/2,45);
-        asprite.runAction(cc.repeatForever(cc.sequence(cc.moveBy(1.5,cc.p(0,20)),cc.moveBy(1.5,cc.p(0,-20)))));
+        //var asprite = new cc.Sprite(res.arrow_png);
+        //this.photo1.addChild(asprite,0);
+        //asprite.setPosition(size.width/2,45);
+        //asprite.runAction(cc.repeatForever(cc.sequence(cc.moveBy(1.5,cc.p(0,20)),cc.moveBy(1.5,cc.p(0,-20)))));
         return true;
     },
 
@@ -172,26 +173,28 @@ var Page6Layer = cc.Layer.extend({
         var action3 = cc.delayTime(0.3+2.0+0.5);
         this.textPhoto.setOpacity(0);
         this.textPhoto.setVisible(true);
-        this.textPhoto.runAction(cc.sequence(action3,cc.fadeIn(1.0)));
+        this.textPhoto.runAction(cc.sequence(action3,cc.fadeIn(2.5)));
 
+
+        var callFunc = new cc.callFunc(this.playAnimationDone);
         var action4 = cc.delayTime(0.3+2.0+0.5+1.5);
         this.flowersPhoto.setOpacity(0);
         this.flowersPhoto.setVisible(true);
         this.flowersPhoto.runAction(cc.sequence(action4,cc.fadeIn(1.0)));
 
-        var action5 = cc.delayTime(0.3+2.5+0.3+2.5+1.0);
-        var photoSize = this.photo1.getContentSize();
-        this.photo1.setOpacity(0);
-        this.photo1.setVisible(true);
-        var action6 = cc.spawn(cc.moveTo(1.5,cc.p(size.width/2,0)),cc.fadeIn(1.5));
-        var callFunc = new cc.callFunc(this.playAnimationDone);
-        this.photo1.runAction(cc.sequence(action5,action6,callFunc));
+        //var action5 = cc.delayTime(0.3+2.5+0.3+2.5+1.0);
+        //var photoSize = this.photo1.getContentSize();
+        //this.photo1.setOpacity(0);
+        //this.photo1.setVisible(true);
+        //var action6 = cc.spawn(cc.moveTo(1.5,cc.p(size.width/2,0)),cc.fadeIn(1.5));
+        //var callFunc = new cc.callFunc(this.playAnimationDone);
+        //this.photo1.runAction(cc.sequence(action5,action6,callFunc));
 
-        var action8 = cc.delayTime(0.3+2.5+0.3+2.5+3.0);
-        var action9 = cc.delayTime(0.3+2.5+0.3+2.5+3.0);
+        var action8 = cc.delayTime(0.3+2.5+0.3+3.0);
+        var action9 = cc.delayTime(0.3+2.5+0.3+3.0);
 
-        this.restartItem.runAction(cc.sequence(action8,cc.spawn(cc.fadeIn(1.0),cc.moveTo(1.0,cc.p(size.width/2,350)))));
-        this.shareItem.runAction(cc.sequence(action9,cc.spawn(cc.fadeIn(1.0),cc.moveTo(1.0,cc.p(size.width/2,250)))));
+        this.restartItem.runAction(cc.sequence(action8,cc.spawn(cc.fadeIn(1.0))));//cc.moveTo(1.0,cc.p(size.width/2,350))
+        this.shareItem.runAction(cc.sequence(action9,cc.spawn(cc.fadeIn(1.0)),callFunc));//cc.moveTo(1.0,cc.p(size.width/2,250))
 
     },
     stopAnimation:function(){

@@ -49,7 +49,7 @@ var Page5Layer = cc.Layer.extend({
         this.photoLayer.setPosition(0,0);
 
 
-        this.people = new cc.Sprite(res.p7_people1);
+        this.people = new cc.Sprite(res.p7_people2);
         this.people.attr({
             x: 320,
             y: 0
@@ -58,7 +58,7 @@ var Page5Layer = cc.Layer.extend({
         this.people.setAnchorPoint(cc.p(0.5,0));
         this.people.setVisible(false);
 
-        this.people2 = new cc.Sprite(res.p7_people2);
+        this.people2 = new cc.Sprite(res.p7_people1);
         this.people2.attr({
             x: 320,
             y: 0
@@ -68,10 +68,11 @@ var Page5Layer = cc.Layer.extend({
         this.people2.setVisible(false);
 
         this.photo = new cc.Sprite(res.p7_text);
+        var photoSize = this.photo.getContentSize();
         this.photo.setAnchorPoint(cc.p(0.5,0));
         this.photo.attr({
-            x: size.width- 400,
-            y: -400
+            x: size.width-photoSize.width/2,
+            y: 50
         });
         this.addChild(this.photo, 100);
         this.photo.setVisible(false);
@@ -84,6 +85,8 @@ var Page5Layer = cc.Layer.extend({
         });
         this.addChild(this.photo1, 100);
         this.photo1.setVisible(false);
+
+
         var asprite = new cc.Sprite(res.arrow_png);
         this.photo1.addChild(asprite,0);
         asprite.setPosition(size.width/2,45);

@@ -35,7 +35,7 @@ var HelloWorldLayer = cc.Layer.extend({
         this.pagesArray.push(page);
 
         page = new Page0Layer();
-        this.pageContainer.addChild(page,-100);
+        this.pageContainer.addChild(page);
         this.pagesArray.push(page);
         page.setPosition(0,-this.pageHeight);
 

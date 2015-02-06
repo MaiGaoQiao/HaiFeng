@@ -75,11 +75,13 @@ var Page3Layer = cc.Layer.extend({
         this.girlPhoto.setAnchorPoint(cc.p(0.5,0));
         this.girlPhoto.setVisible(false);
 
+
         this.photo = new cc.Sprite(res.p5_text);
+        var photoSize = this.photo.getContentSize();
         this.photo.setAnchorPoint(cc.p(0.5,0));
         this.photo.attr({
-            x: size.width-400,
-            y: -400
+            x: size.width-photoSize.width/2,
+            y: 0
         });
         this.addChild(this.photo, 100);
         this.photo.setVisible(false);
@@ -132,7 +134,7 @@ var Page3Layer = cc.Layer.extend({
         var photoSize = this.photo.getContentSize();
         this.photo.setOpacity(0);
         this.photo.setVisible(true);
-        var action6 = cc.spawn(cc.moveTo(1.5,cc.p(size.width-photoSize.width/2,0)),cc.fadeIn(1.5));
+        var action6 = cc.spawn(cc.moveTo(1.5,cc.p(size.width-photoSize.width/2,0)),cc.fadeIn(2.5));
         this.photo.runAction(cc.sequence(action5,action6));
 
         var action5 = cc.delayTime(0.3+1.5+0.3+2.5+1.0+0.5+2.0);

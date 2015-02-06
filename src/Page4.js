@@ -62,10 +62,11 @@ var Page4Layer = cc.Layer.extend({
         this.womanPeople.setVisible(false);
 
         this.photo = new cc.Sprite(res.p6_text);
+        var photoSize = this.photo.getContentSize();
         this.photo.setAnchorPoint(cc.p(0.5,0));
         this.photo.attr({
-            x: size.width+ 200,
-            y: 200
+            x: size.width-photoSize.width/2,
+            y: 50
         });
         this.addChild(this.photo, 100);
         this.photo.setVisible(false);

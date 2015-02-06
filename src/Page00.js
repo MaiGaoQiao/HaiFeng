@@ -56,7 +56,7 @@ var Page00Layer = cc.Layer.extend({
         this.photo.setAnchorPoint(cc.p(0.5,0.5));
         this.photo.attr({
             x: size.width/2,
-            y: size.height/2-100
+            y: size.height/2
         });
         this.addChild(this.photo, 100);
         this.photo.setVisible(false);
@@ -79,7 +79,7 @@ var Page00Layer = cc.Layer.extend({
         this.photo1.attr({
             x: size.width/2,
             y: -200
-        });
+        });//-200
         this.addChild(this.photo1, 101);
         this.photo1.setVisible(false);
 
@@ -106,7 +106,7 @@ var Page00Layer = cc.Layer.extend({
         var action2 = cc.delayTime(1.5);
         this.photo.setOpacity(0);
         this.photo.setVisible(true);
-        this.photo.runAction(cc.sequence(action2,cc.spawn(cc.moveTo(1.0,cc.p(size.width/2,size.height/2)),cc.fadeIn(1.0))));
+        this.photo.runAction(cc.sequence(action2,cc.spawn(cc.moveTo(1.0,cc.p(size.width/2,size.height/2)),cc.fadeIn(2.5))));
 
         var action3= cc.delayTime(2.5);
         this.woman.setOpacity(0);

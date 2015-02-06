@@ -10,6 +10,7 @@ var Page0Layer = cc.Layer.extend({
     playingAnimation:false,
     photo:null,
     photo1:null,
+    people:null,
     ctor:function () {
         //////////////////////////////
         // 1. super init first
@@ -41,15 +42,16 @@ var Page0Layer = cc.Layer.extend({
 
         this.bgLayer = new cc.Layer();
         this.addChild(this.bgLayer);
-        this.bgLayer.setPosition(0,0);
+        this.bgLayer.setPosition(0,-300);
+        this.bgLayer.setScale(1.5);
         // add "HelloWorld" splash screen"
-        var people = new cc.Sprite(res.people_png);
-        people.attr({
+        this.people = new cc.Sprite(res.people_png);
+        this.people.attr({
             x: 50,
             y: 0
         });
-        this.bgLayer.addChild(people, 0);
-        people.setAnchorPoint(cc.p(0,0));
+        this.bgLayer.addChild(this.people, 0);
+        this.people.setAnchorPoint(cc.p(0,0));
         //this.bgLayer.setScale(4);
         //this.bgLayer.setPosition(0,-100);
         //people.runAction(
@@ -81,9 +83,10 @@ var Page0Layer = cc.Layer.extend({
         //);
 
         this.photo = new cc.Sprite(res.p2_text01_png);
+        var photoSize = this.photo.getContentSize();
         this.photo.setAnchorPoint(cc.p(0.5,0));
         this.photo.attr({
-            x: size.width+200,
+            x: size.width-photoSize.width/2,
             y: 200
         });
         this.addChild(this.photo, 100);
@@ -111,11 +114,11 @@ var Page0Layer = cc.Layer.extend({
     playAnimation:function () {
         if(this.playingAnimation) return;
         this.playingAnimation = true;
-        var action1 = cc.moveTo(2.5, cc.p(-55, 0));
+        var action1 = cc.moveTo(2.5, cc.p(-55, -300));
         var action3 = cc.delayTime(0.3+2.0);
-        var action4 = cc.moveTo(2.5, cc.p(-550, 0));
+        var action4 = cc.moveTo(2.5, cc.p(-800, -300));
         var action5 = cc.delayTime(0.3+2.5+2.0);
-        var action6 = cc.spawn(cc.moveTo(2.0,cc.p(-250,0)),cc.scaleTo(2.0,0.8,0.8));
+        var action6 = cc.spawn(cc.moveTo(2.0,cc.p(-250,-100)),cc.scaleTo(2.0,0.8,0.8));
         this.bgLayer.runAction( cc.sequence(action1,action3,action4,action5,action6));
 
 
@@ -124,7 +127,7 @@ var Page0Layer = cc.Layer.extend({
         this.man.setVisible(true);
         this.man.runAction(cc.sequence(action2,cc.fadeIn(1.0)));
 
-        var action5 = cc.delayTime(0.3+2.5+0.3+2.5+1.0+0.5+2.0);
+        var action5 = cc.delayTime(0.3+2.5+0.3+2.5+1.0+2.0);
         this.woman.setOpacity(0);
         this.woman.setVisible(true);
         this.woman.runAction(cc.sequence(action5,cc.fadeIn(1.0)));
@@ -133,8 +136,15 @@ var Page0Layer = cc.Layer.extend({
         var photoSize = this.photo.getContentSize();
         this.photo.setOpacity(0);
         this.photo.setVisible(true);
-        var action6 = cc.spawn(cc.moveTo(1.5,cc.p(size.width-photoSize.width/2,200)),cc.fadeIn(1.5));
+        var action6 = cc.spawn(cc.fadeIn(2.5));//cc.moveTo(1.5,cc.p(size.width-photoSize.width/2,200))
         this.photo.runAction(cc.sequence(action5,action6));
+
+        var action9 = cc.delayTime(0.3+2.5+0.3+2.5+1.0+0.5+2.0+3.5);
+        this.people.setOpacity(255);
+        this.people.setVisible(true);
+        var action99 = cc.spawn(cc.fadeTo(2.5,120),cc.moveBy(180,cc.p(500,0)));//cc.moveTo(1.5,cc.p(size.width-photoSize.width/2,200))
+        this.people.runAction(cc.sequence(action9,action99));
+
 
         var action5 = cc.delayTime(0.3+2.5+0.3+2.5+1.0+0.5+2.0+5.5);
         var photoSize = this.photo1.getContentSize();
