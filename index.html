@@ -18,7 +18,7 @@
             -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
         }
     </style>
-    <script type="text/javascript" src="WeixinApi.js?v=4.3"></script>
+    <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 </head>
 <body style="padding:0; margin: 0; background: #000;">
 <div style="display:none;">
@@ -26,98 +26,102 @@
 </div>
 <img width="500" height="500" style="position:absolute;top:-10000px;" src="http://brain.b0.upaiyun.com/yjy/res/icon.png">
 <canvas id="gameCanvas" width="640" height="1024"></canvas>
-<script>
 
-    //0表示普通版，1表示大众点评版
-    var gamemode = 0;//0 normal，1：hongbao
-
-    //大众点评的链接
-    var urlstr = 'http://m.dianping.com/mmarket/redirect?url=http%3a%2f%2fm.dianping.com%2freservation%2fshare%2fticketactivity%2f10034%3Ftoken%3d%21';
-
-    //分享结束语，默认是这个值，当游戏结束时，会调用gameDidEnd函数，shareDes会变成新的
-    var shareDes = "3以内加减法，确定你都会？";
-
-    //游戏的icon图标
-    var gameIcon = "http://brain.b0.upaiyun.com/yjy/res/icon.png";
-
-
-
-    //以下是实用的非官方API，请替换成官方的API，官方的API说明地址：
-    // http://mp.weixin.qq.com/wiki/7/aaa137b55fb2e0456bf8dd9148dd613f.html#.E6.AD.A5.E9.AA.A4.E4.B8.80.EF.BC.9A.E7.BB.91.E5.AE.9A.E5.9F.9F.E5.90.8D
-
-
-
-    //使用警告：此Api非官方版本，请各位尽量将分享功能迁移至腾讯官方版，会更稳定些！
-    // 微信分享的数据
-    var wxData = {
-        "appId": "wx729bcc4f3ca39e87", // 服务号可以填写appId
-        "imgUrl" : 'http://brain.b0.upaiyun.com/yjy/res/icon.png',
-        "link" : 'http://brain.b0.upaiyun.com/yjy/index.html',
-        "desc" : shareDes,
-        "title" : "1+2=3"
-    };
-
-    //当一局游戏结速的时候会调用此函数,shareDes会被更新
-    function gameDidEnd(){
-        alert(shareDes);
-        wxData = {
-            "appId": "wx729bcc4f3ca39e87", // 服务号可以填写appId
-            "imgUrl" : 'http://brain.b0.upaiyun.com/yjy/res/icon.png',
-            "link" : 'http://brain.b0.upaiyun.com/yjy/index.html',
-            "desc" : shareDes,
-            "title" : "1+2=3"
-        };
-    }
-
-    // 需要分享的内容，请放到ready里
-    WeixinApi.ready(function(Api) {
-        // 分享的回调
-        var wxCallbacks = {
-            // 收藏操作是否触发回调，默认是开启的
-            favorite : false,
-
-            // 分享操作开始之前
-            ready : function() {
-                // 你可以在这里对分享的数据进行重组
-                //alert("准备分享");
-            },
-            // 分享被用户自动取消
-            cancel : function(resp) {
-                // 你可以在你的页面上给用户一个小Tip，为什么要取消呢？
-                //alert("分享被取消，msg=" + resp.err_msg);
-            },
-            // 分享失败了
-            fail : function(resp) {
-                // 分享失败了，是不是可以告诉用户：不要紧，可能是网络问题，一会儿再试试？
-                //alert("分享失败，msg=" + resp.err_msg);
-            },
-            // 分享成功
-            confirm : function(resp) {
-                // 分享成功了，我们是不是可以做一些分享统计呢？
-                //alert("分享成功，msg=" + resp.err_msg);
-            },
-            // 整个分享过程结束
-            all : function(resp,shareTo) {
-                // 如果你做的是一个鼓励用户进行分享的产品，在这里是不是可以给用户一些反馈了？
-                //alert("分享" + (shareTo ? "到" + shareTo : "") + "结束，msg=" + resp.err_msg);
-            }
-        };
-
-        // 用户点开右上角popup菜单后，点击分享给好友，会执行下面这个代码
-        Api.shareToFriend(wxData, wxCallbacks);
-
-        // 点击分享到朋友圈，会执行下面这个代码
-        Api.shareToTimeline(wxData, wxCallbacks);
-
-        // 点击分享到腾讯微博，会执行下面这个代码
-        Api.shareToWeibo(wxData, wxCallbacks);
-
-        // iOS上，可以直接调用这个API进行分享，一句话搞定
-        Api.generalShare(wxData,wxCallbacks);
-    });
-
-</script>
 <script src="frameworks/cocos2d-html5/CCBoot.js"></script>
 <script src="main.js"></script>
+<script>
+    /****************微信api****************/
+    var imgUrl;//要分享的图片路径
+    var descContent;//要分享的内容
+    var lineLink = "网址";
+    var shareTitle = '你生娃长啥样，《最强大脑》告诉你';
+    var appid = '';
+
+    function share_btClicked(){
+        imgUrl = "http://brain.b0.upaiyun.com/yjy/res/icon.png"; //赋值要分享的图片路径
+        descContent = "爱情"; //赋值要分享的内容
+        document.title = "爱情"; //赋值要分享的内容
+    }
+
+    function shareFriend() {
+        WeixinJSBridge.invoke('sendAppMessage', {
+            "appid": appid,
+            "img_url": imgUrl,
+            "img_width": "200",
+            "img_height": "200",
+            "link": lineLink,
+            "desc": descContent,
+            "title": shareTitle
+        }, function (res) {
+            //_report('send_msg', res.err_msg);
+        })
+    }
+    function shareTimeline() {
+        WeixinJSBridge.invoke('shareTimeline', {
+            "img_url": imgUrl,
+            "img_width": "200",
+            "img_height": "200",
+            "link": lineLink,
+            "desc": descContent,
+            "title": shareTitle
+        }, function (res) {
+            //_report('timeline', res.err_msg);
+        });
+    }
+    function shareWeibo() {
+        WeixinJSBridge.invoke('shareWeibo', {
+            "content": descContent,
+            "url": lineLink,
+        }, function (res) {
+            //_report('weibo', res.err_msg);
+        });
+    }
+    // 当微信内置浏览器完成内部初始化后会触发WeixinJSBridgeReady事件。
+    document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+        // 发送给好友
+        WeixinJSBridge.on('menu:share:appmessage', function (argv) {
+            shareFriend();
+        });
+        // 分享到朋友圈
+        WeixinJSBridge.on('menu:share:timeline', function (argv) {
+            shareTimeline();
+        });
+        // 分享到微博
+        WeixinJSBridge.on('menu:share:weibo', function (argv) {
+            shareWeibo();
+        });
+    }, false);
+
+
+
+    //wx.config({
+    //    debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+    //    appId: '', // 必填，公众号的唯一标识
+    //    timestamp: '', // 必填，生成签名的时间戳
+    //    nonceStr: '', // 必填，生成签名的随机串
+    //    signature: '',// 必填，签名，见附录1
+    //    jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+    //});
+    //wx.ready(function(){
+    //    // config信息验证后会执行ready方法，所有接口调用都必须在config接口获得结果之后，config是一个客户端的异步操作，所以如果需要在页面加载时就调用相关接口，则须把相关接口放在ready函数中调用来确保正确执行。对于用户触发时才调用的接口，则可以直接调用，不需要放在ready函数中。
+    //    // 获取“分享到朋友圈”按钮点击状态及自定义分享内容接口
+    //    wx.onMenuShareTimeline({
+    //        title: '分享标题', // 分享标题
+    //        link: "分享的url,以http或https开头",
+    //        imgUrl: "分享图标的url,以http或https开头" // 分享图标
+    //    });
+    //    // 获取“分享给朋友”按钮点击状态及自定义分享内容接口
+    //    wx.onMenuShareAppMessage({
+    //        title: '分享标题', // 分享标题
+    //        desc: function () { return child_node.data('share'); }, // 分享描述
+    //        link: "分享的url,以http或https开头",
+    //        imgUrl: function () { return child_node.attr('src'); }, // 分享图标
+    //        type: 'link', // 分享类型,music、video或link，不填默认为link
+    //    });
+    //});
+    //wx.error(function(res){
+    //    // config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。
+    //});
+</script>
 </body>
 </html>

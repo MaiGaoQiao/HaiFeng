@@ -37,11 +37,11 @@ var Page00Layer = cc.Layer.extend({
         this.addChild(this.bgLayer);
         this.bgLayer.setPosition(0,0);
 
-        var label = cc.LabelTTF.create("样片", "Microsoft STSong", 200);
-        label.setColor(cc.color(255,255,255,80));
-        label.setOpacity(150);
-        label.setPosition(cc.p(size.width/2,size.height/2));
-        this.addChild(label);
+        //var label = cc.LabelTTF.create("样片", "Microsoft STSong", 200);
+        //label.setColor(cc.color(255,255,255,80));
+        //label.setOpacity(150);
+        //label.setPosition(cc.p(size.width/2,size.height/2));
+        //this.addChild(label);
 
         this.man = new cc.Sprite(res.p01_flower_png);
         this.man.attr({
