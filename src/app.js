@@ -112,7 +112,7 @@ var HelloWorldLayer = cc.Layer.extend({
         var pl = touch.getPreviousLocation();
         //var dx = position.x - pl.x;
         var dy = position.y - pl.y;
-        if((target.currentPageIndex==0 && dy < 0)|| (target.currentPageIndex==target.pagesArray.length-1 && dy > 0)){
+        if((target.currentPageIndex==0 && dy < 0)|| (target.currentPageIndex==target.pagesArray.length-1 && dy > 0)|| dy <0){
             target.pageContainer.setPosition(target.pageContainer.x,target.pageContainer.y);
         }else
             target.pageContainer.setPosition(target.pageContainer.x,target.pageContainer.y+dy);
@@ -124,7 +124,7 @@ var HelloWorldLayer = cc.Layer.extend({
         if(dy > 0 && target.currentPageIndex < target.pagesArray.length-1){
             target.gotoPage(target.currentPageIndex+1);
         }else if(dy < 0 && target.currentPageIndex > 0){
-            target.gotoPage(target.currentPageIndex-1);
+            target.gotoPage(target.currentPageIndex);
         }else{
             target.gotoPage(target.currentPageIndex);
         }
