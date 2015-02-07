@@ -9,8 +9,9 @@ var Page5Layer = cc.Layer.extend({
     photoLayer:null,
     photo:null,
     photo1:null,
-    people:null,
-    people2:null,
+    peopleIn:null,
+    peopleOut:null,
+    photoFrame:null,
     ctor:function () {
         //////////////////////////////
         // 1. super init first
@@ -49,23 +50,32 @@ var Page5Layer = cc.Layer.extend({
         this.photoLayer.setPosition(0,0);
 
 
-        this.people = new cc.Sprite(res.p7_people2);
-        this.people.attr({
+        this.peopleIn = new cc.Sprite(res.p7_people_in);
+        this.peopleIn.attr({
             x: 320,
             y: 0
         });
-        this.photoLayer.addChild(this.people, 2);
-        this.people.setAnchorPoint(cc.p(0.5,0));
-        this.people.setVisible(false);
+        this.photoLayer.addChild(this.peopleIn, 2);
+        this.peopleIn.setAnchorPoint(cc.p(0.5,0));
+        //this.peopleIn.setVisible(false);
 
-        this.people2 = new cc.Sprite(res.p7_people1);
-        this.people2.attr({
+        this.peopleOut = new cc.Sprite(res.p7_people_out);
+        this.peopleOut.attr({
             x: 320,
             y: 0
         });
-        this.photoLayer.addChild(this.people2, 0);
-        this.people2.setAnchorPoint(cc.p(0.5,0));
-        this.people2.setVisible(false);
+        this.photoLayer.addChild(this.peopleOut, 2);
+        this.peopleOut.setAnchorPoint(cc.p(0.5,0));
+        //this.peopleOut.setVisible(false);
+
+        this.photoFrame = new cc.Sprite(res.p7_kuang);
+        this.photoFrame.attr({
+            x: 320,
+            y: 0
+        });
+        this.photoLayer.addChild(this.photoFrame, 0);
+        this.photoFrame.setAnchorPoint(cc.p(0.5,0));
+        this.photoFrame.setVisible(false);
 
         this.photo = new cc.Sprite(res.p7_text);
         var photoSize = this.photo.getContentSize();
@@ -81,10 +91,10 @@ var Page5Layer = cc.Layer.extend({
         this.photo1.setAnchorPoint(cc.p(0.5,0));
         this.photo1.attr({
             x: size.width/2,
-            y: -200
+            y: 0
         });
         this.addChild(this.photo1, 100);
-        this.photo1.setVisible(false);
+        //this.photo1.setVisible(false);
 
 
         var asprite = new cc.Sprite(res.arrow_png);
@@ -102,20 +112,25 @@ var Page5Layer = cc.Layer.extend({
         if(this.playingAnimation) return;
         this.playingAnimation = true;
         var action2 = cc.delayTime(0.5);
-        this.people.setOpacity(0);
-        this.people.setVisible(true);
-        this.people.runAction(cc.sequence(action2,cc.fadeIn(1.0),cc.tintTo(1.5,177,177,0)));
+        this.photoFrame.setOpacity(0);
+        this.photoFrame.setVisible(true);
+        this.photoFrame.runAction(cc.sequence(action2,cc.fadeTo(2.0,122),cc.tintTo(1.0,122,122,122)));//,cc.tintTo(1.5,122,122,122)
 
-        var action3 = cc.delayTime(1.5);
-        this.people2.setOpacity(0);
-        this.people2.setVisible(true);
-        this.people2.runAction(cc.sequence(action3,cc.fadeIn(1.0),cc.tintTo(1.5,177,177,177)));
+        var action3 = cc.delayTime(2.0);
+        //this.people2.setOpacity(122);
+        this.peopleOut.setVisible(true);
+        this.peopleOut.runAction(cc.sequence(action3,cc.fadeTo(2.0,0)));//,cc.tintTo(1.5,177,177,177)
+
+        var action3 = cc.delayTime(3.0);
+        //this.people2.setOpacity(122);
+        this.peopleIn.setVisible(true);
+        this.peopleIn.runAction(cc.sequence(action3,cc.fadeTo(2.0,122),cc.tintTo(1.0,122,122,122)));//,cc.tintTo(1.5,177,177,177)
 
 
         //var action4 = cc.delayTime(2.5);
         //this.photoLayer.runAction(cc.sequence(action4,cc.tintTo(1.0,177,177,0)));
 
-        var action5 = cc.delayTime(0.3+2.5+0.3);
+        var action5 = cc.delayTime(0.3+4.5+0.3);
         var photoSize = this.photo.getContentSize();
         this.photo.setOpacity(0);
         this.photo.setVisible(true);
@@ -124,9 +139,9 @@ var Page5Layer = cc.Layer.extend({
 
         var action5 = cc.delayTime(0.3+2.5+0.3+2.5+1.0);
         var photoSize = this.photo1.getContentSize();
-        this.photo1.setOpacity(0);
+        //this.photo1.setOpacity(0);
         this.photo1.setVisible(true);
-        var action6 = cc.spawn(cc.moveTo(1.5,cc.p(size.width/2,0)),cc.fadeIn(1.5));
+        var action6 = cc.spawn(cc.moveTo(1.5,cc.p(size.width/2,0)));//,cc.fadeIn(1.5)
         var callFunc = new cc.callFunc(this.playAnimationDone);
         this.photo1.runAction(cc.sequence(action5,action6,callFunc));
 

@@ -65,7 +65,7 @@ var Page3Layer = cc.Layer.extend({
 
         this.bgLayer = new cc.Layer();
         this.addChild(this.bgLayer);
-        this.bgLayer.setPosition(0,0);
+        this.bgLayer.setPosition(-70,0);
         this.girlPhoto = new cc.Sprite(res.p5_b);
         this.girlPhoto.attr({
             x: 415,
@@ -90,10 +90,10 @@ var Page3Layer = cc.Layer.extend({
         this.photo1.setAnchorPoint(cc.p(0.5,0));
         this.photo1.attr({
             x: size.width/2,
-            y: -200
+            y: 0
         });
         this.addChild(this.photo1, 100);
-        this.photo1.setVisible(false);
+        //this.photo1.setVisible(false);
         var asprite = new cc.Sprite(res.arrow_png);
         this.photo1.addChild(asprite,0);
         asprite.setPosition(size.width/2,45);
@@ -108,7 +108,7 @@ var Page3Layer = cc.Layer.extend({
     playAnimation:function () {
         if(this.playingAnimation) return;
         this.playingAnimation = true;
-        var action1 = cc.moveTo(2.5, cc.p(-80, 0));
+        var action1 = cc.moveTo(2.5, cc.p(-70, 0));
         //var action3 = cc.delayTime(0.3+2.0);
         //var action4 = cc.moveTo(2.5, cc.p(-550, 0));
         //var action5 = cc.delayTime(0.3+2.5+2.0);
@@ -139,9 +139,9 @@ var Page3Layer = cc.Layer.extend({
 
         var action5 = cc.delayTime(0.3+1.5+0.3+2.5+1.0+0.5+2.0);
         var photoSize = this.photo1.getContentSize();
-        this.photo1.setOpacity(0);
+        //this.photo1.setOpacity(0);
         this.photo1.setVisible(true);
-        var action6 = cc.spawn(cc.moveTo(1.5,cc.p(size.width/2,0)),cc.fadeIn(1.5));
+        var action6 = cc.spawn(cc.moveTo(1.5,cc.p(size.width/2,0)));//,cc.fadeIn(1.5)
         var callFunc = new cc.callFunc(this.playAnimationDone);
         this.photo1.runAction(cc.sequence(action5,action6,callFunc));
 

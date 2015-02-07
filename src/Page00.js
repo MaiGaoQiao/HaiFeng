@@ -78,10 +78,10 @@ var Page00Layer = cc.Layer.extend({
         this.photo1.setAnchorPoint(cc.p(0.5,0));
         this.photo1.attr({
             x: size.width/2,
-            y: -200
+            y: 0
         });//-200
         this.addChild(this.photo1, 101);
-        this.photo1.setVisible(false);
+        //this.photo1.setVisible(false);
 
         var asprite = new cc.Sprite(res.arrow_png);
         this.photo1.addChild(asprite,0);

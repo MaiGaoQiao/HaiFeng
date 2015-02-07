@@ -60,7 +60,7 @@ var Page6Layer = cc.Layer.extend({
         this.textPhoto = new cc.Sprite(res.p08_text);
         var photoSize = this.textPhoto.getContentSize();
         this.textPhoto.attr({
-            x: 345,
+            x: size.width/2+5,
             y: 70
         });
         this.bgLayer.addChild(this.textPhoto, 0);
@@ -72,7 +72,7 @@ var Page6Layer = cc.Layer.extend({
         this.bgLayer.setPosition(0,0);
         this.flowersPhoto = new cc.Sprite(res.p08_flowers);
         this.flowersPhoto.attr({
-            x: 415,
+            x: 400,
             y: 0
         });
         this.bgLayer.addChild(this.flowersPhoto, 0);

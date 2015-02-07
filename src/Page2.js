@@ -45,7 +45,7 @@ var Page2Layer = cc.Layer.extend({
         var people = new cc.Sprite(res.p4_people);
         people.attr({
             x: 80,
-            y: -80
+            y: 0
         });
         this.bgLayer.addChild(people, 0);
         people.setAnchorPoint(cc.p(0,0));
@@ -64,10 +64,10 @@ var Page2Layer = cc.Layer.extend({
         this.photo1.setAnchorPoint(cc.p(0.5,0));
         this.photo1.attr({
             x: size.width/2,
-            y: -200
+            y: 0
         });
         this.addChild(this.photo1, 100);
-        this.photo1.setVisible(false);
+        //this.photo1.setVisible(false);
         var asprite = new cc.Sprite(res.arrow_png);
         this.photo1.addChild(asprite,0);
         asprite.setPosition(size.width/2,45);
@@ -98,9 +98,9 @@ var Page2Layer = cc.Layer.extend({
 
         var action5 = cc.delayTime(0.3+2.5+0.3+2.5+1.0+0.5);
         var photoSize = this.photo1.getContentSize();
-        this.photo1.setOpacity(0);
+        //this.photo1.setOpacity(0);
         this.photo1.setVisible(true);
-        var action6 = cc.spawn(cc.moveTo(1.5,cc.p(size.width/2,0)),cc.fadeIn(1.5));
+        var action6 = cc.spawn(cc.moveTo(1.5,cc.p(size.width/2,0)));//,cc.fadeIn(1.5)
         var callFunc = new cc.callFunc(this.playAnimationDone);
         this.photo1.runAction(cc.sequence(action5,action6,callFunc));
 
