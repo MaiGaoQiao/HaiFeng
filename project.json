@@ -12,11 +12,7 @@
 
     "jsList" : [
         "src/resource.js",
-        "src/IntroScene0.js",
-        "src/GameEndScene.js",
         "src/MyLoaderScene.js",
-        "src/GameScene.js",
-        "src/AnswerSprite.js",
         "src/Page00.js",
         "src/Page0.js",
         "src/Page1.js",
