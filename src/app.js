@@ -1,5 +1,6 @@
 var size;
 var animationDone=false;
+var enableSlide = false;
 var HelloWorldLayer = cc.Layer.extend({
     pageContainer:null,
     currentPageIndex:0,
@@ -95,18 +96,35 @@ var HelloWorldLayer = cc.Layer.extend({
     onTouchBegan:function (touch, event) {
         var target = event.getCurrentTarget();
         var position = touch.getLocation();
+        target.currentPage = target.pagesArray[target.currentPageIndex];
         target.beginY = position.y;
+
+        var cp = target.currentPage.convertToNodeSpace(position);
+
+        if(cp.y > cc.winSize.height/2) {
+            enableSlide = false;
+        }else{
+            enableSlide = true;
+        }
             var pl = touch.getPreviousLocation();
             //var dx = position.x - pl.x;
             var dy = position.y - pl.y;
 
-            target.pageContainer.setPosition(target.pageContainer.x,target.pageContainer.y+dy);
+            //target.pageContainer.setPosition(target.pageContainer.x,target.pageContainer.y+dy);
 
         return true;
     },
     onTouchMoved:function (touch, event) {
         var target = event.getCurrentTarget();
         var position = touch.getLocation();
+        var cp = target.currentPage.convertToNodeSpace(position);
+        if(cp.y > cc.winSize.height/2) {
+            enableSlide = false;
+            return;
+        }else{
+            enableSlide = true;
+        }
+
 
 
         var pl = touch.getPreviousLocation();
@@ -120,6 +138,9 @@ var HelloWorldLayer = cc.Layer.extend({
     onTouchEnded:function (touch, event) {
         var target = event.getCurrentTarget();
         var position = touch.getLocation();
+        var cp = target.currentPage.convertToNodeSpace(position);
+        if(!enableSlide) return;
+        //if(cp.y > cc.winSize.height/2) return;
         var dy = position.y - target.beginY;
         if(dy > 0 && target.currentPageIndex < target.pagesArray.length-1){
             target.gotoPage(target.currentPageIndex+1);
