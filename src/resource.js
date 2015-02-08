@@ -17,7 +17,7 @@ var res = {
     p01_flowers_png : "res/p01-flowers.png",
     p01_text_png : "res/p01-text.png",
     button_press_wav : "res/button_press.wav",
-    //win_wav : "res/level_win.wav",
+    p08_flowersbag_png : "res/p08-flowersbag.png",
     //failed_wav : "res/level_failed.wav",
     //p2_bak_jpg : "res/p2-bak.jpg",
     p2_text01_png : "res/p2-text01.png",
