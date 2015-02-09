@@ -49,7 +49,7 @@ var Page6Layer = cc.Layer.extend({
         this.flowerPhoto = new cc.Sprite(res.p08_flower);
         this.flowerPhoto.attr({
             x: 320,
-            y: 70
+            y: 20
         });
         this.bgLayer.addChild(this.flowerPhoto, 0);
         this.flowerPhoto.setAnchorPoint(cc.p(0.5,0));
@@ -62,7 +62,7 @@ var Page6Layer = cc.Layer.extend({
         var photoSize = this.textPhoto.getContentSize();
         this.textPhoto.attr({
             x: size.width/2+5,
-            y: 70
+            y: 20
         });
         this.bgLayer.addChild(this.textPhoto, 0);
         this.textPhoto.setAnchorPoint(cc.p(0.5,0));
@@ -193,7 +193,7 @@ var Page6Layer = cc.Layer.extend({
         this.flowersPhoto.setOpacity(0);
         this.flowersPhoto.setVisible(true);
         var callFuncFlowerFadeDone = new cc.callFunc(this.flowerFadeDone,this,this);
-        this.flowersPhoto.runAction(cc.sequence(action4,cc.fadeIn(2.0),cc.fadeOut(2.0),callFuncFlowerFadeDone));
+        this.flowersPhoto.runAction(cc.sequence(action4,cc.fadeIn(3.0),cc.fadeOut(3.0),callFuncFlowerFadeDone));
 
         //var action5 = cc.delayTime(0.3+2.5+0.3+2.5+1.0);
         //var photoSize = this.photo1.getContentSize();
@@ -215,7 +215,7 @@ var Page6Layer = cc.Layer.extend({
         this.packagePhoto.setOpacity(0);
         this.packagePhoto.setVisible(true);
         var callFuncFlowerFadeDone = new cc.callFunc(this.packageFadeDone,this,this);
-        this.packagePhoto.runAction(cc.sequence(action4,cc.fadeIn(2.0),cc.fadeOut(2.0),callFuncFlowerFadeDone));
+        this.packagePhoto.runAction(cc.sequence(action4,cc.fadeIn(3.0),cc.fadeOut(3.0),callFuncFlowerFadeDone));
     },
 
     packageFadeDone:function(sender ,s) {
@@ -223,7 +223,7 @@ var Page6Layer = cc.Layer.extend({
         this.flowersPhoto.setOpacity(0);
         this.flowersPhoto.setVisible(true);
         var callFuncFlowerFadeDone = new cc.callFunc(this.flowerFadeDone,this,this);
-        this.flowersPhoto.runAction(cc.sequence(action4,cc.fadeIn(2.0),cc.fadeOut(2.0),callFuncFlowerFadeDone));
+        this.flowersPhoto.runAction(cc.sequence(action4,cc.fadeIn(3.0),cc.fadeOut(3.0),callFuncFlowerFadeDone));
     },
 
     stopAnimation:function(){
@@ -243,7 +243,7 @@ var Page6Layer = cc.Layer.extend({
     },
     playAnimationDone:function(){
         this.animationDone = true;
-        this.playingAnimation = false;
+        //this.playingAnimation = false;
     },
 
     shareGame:function(){

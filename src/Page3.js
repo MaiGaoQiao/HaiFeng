@@ -165,7 +165,7 @@ var Page3Layer = cc.Layer.extend({
     },
     playAnimationDone:function(){
         this.animationDone = true;
-        this.playingAnimation = false;
+        //this.playingAnimation = false;
     }
 });
 
